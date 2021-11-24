@@ -16,7 +16,9 @@
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint src",
-    "prepare": "tsdx build"
+    "prepare": "tsdx build",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "peerDependencies": {},
   "prettier": {
@@ -37,6 +39,10 @@
   "dependencies": {
     "@apimatic/core": "^0.6.2",
     "@apimatic/schema": "^0.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FirstLanguage/firstlanguage-typescript.git"
   },
   "bugs": {
     "email": "info@firstlanguage.in"

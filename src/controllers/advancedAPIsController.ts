@@ -14,10 +14,29 @@ import {
   Responseclassify,
   responseclassifySchema,
 } from '../models/responseclassify';
-import { array, optional, unknown } from '../schema';
+import { array} from '../schema';
 import { BaseController } from './baseController';
 
 export class AdvancedAPIsController extends BaseController {
+
+  tryParseJSONObject (jsonString: string){
+    try {
+        var o = JSON.parse(jsonString);
+
+        // Handle non-exception-throwing cases:
+        // Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
+        // but... JSON.parse(null) returns null, and typeof null === "object", 
+        // so we must check for that, too. Thankfully, null is falsey, so this suffices:
+        if (o && typeof o === "object") {
+            return o;
+        }
+    }
+    catch (e) { }
+
+    return false;
+  };
+
+
   /**
    * # Stemmer : Defintion and it's usage
    *
@@ -27,13 +46,13 @@ export class AdvancedAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getClassification(
-    body: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Responseclassify>> {
     const req = this.createRequest('POST', '/api/classify');
-    const mapped = req.prepareArgs({ body: [body, unknown()] });
+    const mapped = this.tryParseJSONObject(body)
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Error output');
     req.throwOn(426, ApiClassify426Error, 'Please use HTTPS protocol');
     return req.callAsJson(responseclassifySchema, requestOptions);
@@ -48,13 +67,13 @@ export class AdvancedAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getQA(
-    body?: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ApiQaResponse>> {
     const req = this.createRequest('POST', '/api/qa');
-    const mapped = req.prepareArgs({ body: [body, optional(unknown())] });
+    const mapped = this.tryParseJSONObject(body)
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Bad Request');
     req.throwOn(426, M426Error, 'Please use HTTPS protocol');
     return req.callAsJson(apiQaResponseSchema, requestOptions);
@@ -69,13 +88,13 @@ export class AdvancedAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getNER(
-    body?: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ApiNerResponse[]>> {
     const req = this.createRequest('POST', '/api/ner');
-    const mapped = req.prepareArgs({ body: [body, optional(unknown())] });
+    const mapped = this.tryParseJSONObject(body)
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Bad Request');
     req.throwOn(426, M426Error, 'Please use HTTPS protocol');
     return req.callAsJson(array(apiNerResponseSchema), requestOptions);

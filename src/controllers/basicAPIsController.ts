@@ -14,10 +14,29 @@ import { Responselemma, responselemmaSchema } from '../models/responselemma';
 import { Responsemorph, responsemorphSchema } from '../models/responsemorph';
 import { Responsepo, responsepoSchema } from '../models/responsepo';
 import { Responsestem, responsestemSchema } from '../models/responsestem';
-import { array, unknown } from '../schema';
+import { array } from '../schema';
 import { BaseController } from './baseController';
 
 export class BasicAPIsController extends BaseController {
+
+  tryParseJSONObject (jsonString: string){
+    try {
+        var o = JSON.parse(jsonString);
+
+        // Handle non-exception-throwing cases:
+        // Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
+        // but... JSON.parse(null) returns null, and typeof null === "object", 
+        // so we must check for that, too. Thankfully, null is falsey, so this suffices:
+        if (o && typeof o === "object") {
+            return o;
+        }
+    }
+    catch (e) { }
+
+    return false;
+  };
+
+
   /**
    * # Stemmer : Defintion and it's usage
    * A word takes different inflectional forms. For instance, the word, "Compute" can take the forms,
@@ -61,13 +80,13 @@ export class BasicAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getStemmer(
-    body: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Responsestem[]>> {
     const req = this.createRequest('POST', '/api/stemmer');
-    const mapped = req.prepareArgs({ body: [body, unknown()] });
+    const mapped = this.tryParseJSONObject(body)
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Error output');
     req.throwOn(426, ApiStemmer426Error, 'Please use HTTPS protocol');
     return req.callAsJson(array(responsestemSchema), requestOptions);
@@ -82,13 +101,13 @@ export class BasicAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getLemma(
-    body: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Responselemma[]>> {
     const req = this.createRequest('POST', '/api/lemmatize');
-    const mapped = req.prepareArgs({ body: [body, unknown()] });
+    const mapped = this.tryParseJSONObject(body)
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Error output');
     req.throwOn(426, ApiLemmatize426Error, 'Please use HTTPS protocol');
     return req.callAsJson(array(responselemmaSchema), requestOptions);
@@ -103,13 +122,13 @@ export class BasicAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getMorph(
-    body: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Responsemorph>> {
     const req = this.createRequest('POST', '/api/morph');
-    const mapped = req.prepareArgs({ body: [body, unknown()] });
+    const mapped = this.tryParseJSONObject(body)
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Error output');
     req.throwOn(426, ApiMorph426Error, 'Please use HTTPS protocol');
     return req.callAsJson(responsemorphSchema, requestOptions);
@@ -147,13 +166,13 @@ export class BasicAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getPostag(
-    body: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Responsepo[]>> {
     const req = this.createRequest('POST', '/api/postag');
-    const mapped = req.prepareArgs({ body: [body, unknown()] });
+    const mapped = this.tryParseJSONObject(body)
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Error output');
     req.throwOn(426, ApiPostag426Error, 'Please use HTTPS protocol');
     return req.callAsJson(array(responsepoSchema), requestOptions);
