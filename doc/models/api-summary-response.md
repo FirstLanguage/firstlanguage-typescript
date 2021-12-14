@@ -1,21 +1,21 @@
 
-# Errors Error
+# Api Summary Response
 
 ## Structure
 
-`ErrorsError`
+`ApiSummaryResponse`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Errors1[] \| undefined`](/doc/models/errors-1.html) | Optional | - |
+| `summary` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "errors": null
+  "summary": null
 }
 ```
 

@@ -29,7 +29,18 @@ Run the following commands in the command prompt or shell of your choice to chec
 
 ![Version Check](https://apidocs.io/illustration/typescript?workspaceFolder=FirstLanguageAPI&step=versionCheck)
 
-### Install Dependencies
+### Usage
+
+You can use our NPM published package by installing it usign below command
+
+```
+npm i firstlanguage-typescript
+```
+
+Or you can clone our [repo](https://github.com/FirstLanguage/firstlanguage-typescript.git)
+
+
+### Install Dependencies when using from source
 
 - To resolve all dependencies, go to the **SDK root directory** and run the following command with npm:
 
@@ -98,6 +109,56 @@ const client = new Client({
 ## Authorization
 
 This API uses `Custom Header Signature`.
+
+## Example working code
+Replace <Your_API_Key> with your API Key from portal dashboard
+
+```
+import { Client, BasicAPIsController, ApiError } from "firstlanguage-typescript";
+
+
+const client = new Client({
+    timeout: 0,
+    apikey: '<Your_API_Key>',
+  })
+
+const basicAPIsController = new BasicAPIsController(client);
+
+const contentType = null;
+const body = `{
+     "input":{
+      "text":"Smiling makes everyone happy",
+      "lang":"en"
+    }
+  }`;
+
+   
+basicAPIsController.getPostag(body).then(response => {
+ console.log(response.result);  
+}).catch(error => {
+    if (error instanceof ApiError) {
+        const errors = error.result;        
+        console.log(errors);
+      }
+});
+```
+
+Save the above code into a example.js file. Run the above code using 
+
+```
+node example.js
+```
+
+You will get an output like below
+
+```
+[
+  { orginalText: 'Smiling', postag: 'VERB' },
+  { orginalText: 'makes', postag: 'VERB' },
+  { orginalText: 'everyone', postag: 'PRON' },
+  { orginalText: 'happy', postag: 'ADJ' }
+]
+```
 
 ## List of APIs
 
