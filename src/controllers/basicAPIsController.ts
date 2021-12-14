@@ -15,7 +15,7 @@ import { Responselemma, responselemmaSchema } from '../models/responselemma';
 import { Responsemorph, responsemorphSchema } from '../models/responsemorph';
 import { Responsepo, responsepoSchema } from '../models/responsepo';
 import { Responsestem, responsestemSchema } from '../models/responsestem';
-import { array, unknown } from '../schema';
+import { array } from '../schema';
 import { BaseController } from './baseController';
 
 export class BasicAPIsController extends BaseController {
