@@ -9,13 +9,21 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `input` | [`Input3 \| undefined`](/doc/models/input-3.md) | Optional | - |
+| `input` | [`Input3`](/doc/models/input-3.html) | Required | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "input": null
+  "input": {
+    "url": "http://news.bbc.co.uk/2/hi/health/2284783.stm",
+    "lang": "en",
+    "contentType": "html",
+    "labels": [
+      "good",
+      "bad"
+    ]
+  }
 }
 ```
 

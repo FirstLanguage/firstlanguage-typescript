@@ -28,6 +28,8 @@ export * from './errors/errorsError';
 export * from './errors/m426Error';
 export { ApiNerResponse } from './models/apiNerResponse';
 export { ApiQaResponse } from './models/apiQaResponse';
+export { ApiSummaryResponse } from './models/apiSummaryResponse';
+export { ApiTranslateResponse } from './models/apiTranslateResponse';
 export { Errors1 } from './models/errors1';
 export { Input } from './models/input';
 export { Input1 } from './models/input1';

@@ -1,21 +1,21 @@
 
-# Errors Error
+# Api Translate Response
 
 ## Structure
 
-`ErrorsError`
+`ApiTranslateResponse`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Errors1[] \| undefined`](/doc/models/errors-1.html) | Optional | - |
+| `generatedText` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "errors": null
+  "generated_text": null
 }
 ```
 
