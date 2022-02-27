@@ -125,6 +125,7 @@ export class AdvancedAPIsController extends BaseController {
     req.json(mapped);
     req.throwOn(400, ErrorsError, 'Bad Request');
     req.throwOn(426, M426Error, 'Please use HTTPS protocol');
+    req.throwOn(429, ApiError, 'Too Many Requests');
     return req.callAsJson(apiQaResponseSchema, requestOptions);
   }
 

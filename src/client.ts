@@ -19,7 +19,7 @@ import {
   AuthenticatorInterface,
   createRequestBuilderFactory,
   HttpClient,
-  HttpClientInterface,
+  HttpClientInterface,  
   XmlSerializerInterface,
 } from './core';
 import { XmlSerialization } from './http/xmlSerialization';
@@ -40,7 +40,7 @@ export class Client implements ClientInterface {
       customHeaderAuthenticationProvider(this._config),
       new HttpClient({
         timeout: this._config.timeout,
-        clientConfigOverrides: this._config.unstable_httpClientOptions,
+        clientConfigOverrides: this._config.unstable_httpClientOptions,        
       }),
       [
         withErrorHandlers,
