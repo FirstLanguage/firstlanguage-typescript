@@ -9,12 +9,24 @@ import { ApiResponse, RequestOptions } from '../core';
 import { ApiClassify426Error } from '../errors/apiClassify426Error';
 import { ErrorsError } from '../errors/errorsError';
 import { M426Error } from '../errors/m426Error';
+import {
+  ApiImagecaptionRequest,
+  apiImagecaptionRequestSchema,
+} from '../models/apiImagecaptionRequest';
+import {
+  ApiImagecaptionResponse,
+  apiImagecaptionResponseSchema,
+} from '../models/apiImagecaptionResponse';
 import { ApiNerResponse, apiNerResponseSchema } from '../models/apiNerResponse';
 import { ApiQaResponse, apiQaResponseSchema } from '../models/apiQaResponse';
 import {
   ApiSummaryResponse,
   apiSummaryResponseSchema,
 } from '../models/apiSummaryResponse';
+import {
+  ApiTableqaResponse,
+  apiTableqaResponseSchema,
+} from '../models/apiTableqaResponse';
 import {
   ApiTranslateResponse,
   apiTranslateResponseSchema,
@@ -114,6 +126,81 @@ export class AdvancedAPIsController extends BaseController {
     req.throwOn(400, ErrorsError, 'Bad Request');
     req.throwOn(426, M426Error, 'Please use HTTPS protocol');
     return req.callAsJson(apiQaResponseSchema, requestOptions);
+  }
+
+  /**
+   * # TableQA : Defintion and it's usage
+   *
+   * Table QA uses TAPAS based model to get answers from table input. The table can be parsed into a JSON
+   * object or it can be a link to a CSV file. Currently only Plain CSV file is supported.
+   *
+   * This API works only for English language currently
+   *
+   * Example for flattend table in JSON Format:<br/>
+   * {"Cities": ["Paris, France", "London, England", "Lyon, France"], "Inhabitants": ["2.161", "8.982",
+   * "0.513"]}
+   *
+   * The API can return the original table rows from which the answer was extracted based on the flag
+   * 'sendBackRows'
+   *
+   * @param body         Add a JSON Input as per the schema defined below. For URL input, if you are
+   *                                providing Google drive or Google Spreadsheet url ensure that you provide a link
+   *                                which can download the file directly and not the share link.  Example: For Google
+   *                                Spreadsheet, the url format will be like below: https://docs.google.
+   *                                com/spreadsheets/d/1TtzPAHqpaTB7Ltdq0zwZ8FamF7O9aC4KH4EpmwI/export?
+   *                                format=csv&gid=151344200  Or for Google Drive, it will be like below: https://drive.
+   *                                google.com/uc?id=idofthefile  For Flat table input check the example out.
+   * @return Response from the API call
+   */
+  async getTableQA(
+    body?: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ApiTableqaResponse[]>> {
+    const req = this.createRequest('POST', '/api/tableqa');
+    const mapped = this.tryParseJSONObject(body)
+    req.header('Content-Type', 'application/json');
+    req.json(mapped);
+    req.throwOn(400, ErrorsError, 'Bad Request');
+    req.throwOn(426, M426Error, 'Please use HTTPS protocol');
+    req.throwOn(429, ApiError, 'Too Many Requests');
+    return req.callAsJson(array(apiTableqaResponseSchema), requestOptions);
+  }
+
+  /**
+   * # Image Captioning with Visual Attention : Defintion and it's usage
+   *
+   * Image Captioning is the process of generating textual description of an image. It uses both Natural
+   * Language Processing and Computer Vision to generate the captions.
+   *
+   * This API works generates only English Captions
+   *
+   *
+   * <b>Enterprise Plan Alert:</b> For Enterprise Users GPU powered endpoint can be provisioned. <b> This
+   * will reduce the response time of the API by alomst 90%.</b>
+   *
+   * @param body         Add a JSON Input as per the schema defined below.   For URL,
+   *                                                      if you are providing Google drive or Google Spreadsheet url
+   *                                                      ensure that you provide a link which can download the file
+   *                                                      directly and not the share link.  Example: For Google
+   *                                                      Spreadsheet, the url format will be like below: https://docs.
+   *                                                      google.
+   *                                                      com/spreadsheets/d/1TtzPAHqpaTB7Ltdq0zwZ8FamF7OwI/export?
+   *                                                      format=csv&gid=151344200  Or for Google Drive, it will be
+   *                                                      like below: https://drive.google.com/uc?id=idofthefile
+   * @return Response from the API call
+   */
+  async getImageCaption(
+    body?: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ApiImagecaptionResponse>> {
+    const req = this.createRequest('POST', '/api/imagecaption');
+    const mapped = this.tryParseJSONObject(body)
+    req.header('Content-Type', 'application/json');
+    req.json(mapped);
+    req.throwOn(400, ErrorsError, 'Bad Request');
+    req.throwOn(426, M426Error, 'Please use HTTPS protocol');
+    req.throwOn(429, ApiError, 'Too Many Requests');
+    return req.callAsJson(apiImagecaptionResponseSchema, requestOptions);
   }
 
   /**

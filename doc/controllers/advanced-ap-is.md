@@ -1,7 +1,5 @@
 # Advanced AP Is
 
-Advanced text processing APIs
-
 ```ts
 const advancedAPIsController = new AdvancedAPIsController(client);
 ```
@@ -12,11 +10,13 @@ const advancedAPIsController = new AdvancedAPIsController(client);
 
 ## Methods
 
-* [Get Classification](/doc/controllers/advanced-ap-is.html#get-classification)
-* [Get QA](/doc/controllers/advanced-ap-is.html#get-qa)
-* [Get NER](/doc/controllers/advanced-ap-is.html#get-ner)
-* [Get Summary](/doc/controllers/advanced-ap-is.html#get-summary)
-* [Get Translate](/doc/controllers/advanced-ap-is.html#get-translate)
+* [Get Classification](/doc/controllers/advanced-ap-is.md#get-classification)
+* [Get QA](/doc/controllers/advanced-ap-is.md#get-qa)
+* [Get Table QA](/doc/controllers/advanced-ap-is.md#get-table-qa)
+* [Get Image Caption](/doc/controllers/advanced-ap-is.md#get-image-caption)
+* [Get NER](/doc/controllers/advanced-ap-is.md#get-ner)
+* [Get Summary](/doc/controllers/advanced-ap-is.md#get-summary)
+* [Get Translate](/doc/controllers/advanced-ap-is.md#get-translate)
 
 
 # Get Classification
@@ -61,13 +61,13 @@ async getClassification(
 
 ## Response Type
 
-[`Responseclassify`](/doc/models/responseclassify.html)
+[`Responseclassify`](/doc/models/responseclassify.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'Liquid error: Object of type 'DotLiquid.Hash' cannot be converted to type 'System.String'.';
+const body = '{"key1":"val1","key2":"val2"}';
 try {
   const { result, ...httpResponse } = await advancedAPIsController.getClassification(body);
   // Get more response info...
@@ -99,8 +99,8 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`ApiClassify426Error`](/doc/models/api-classify-426-error.html) |
+| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiClassify426Error`](/doc/models/api-classify-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
@@ -128,13 +128,13 @@ async getQA(
 
 ## Response Type
 
-[`ApiQaResponse`](/doc/models/api-qa-response.html)
+[`ApiQaResponse`](/doc/models/api-qa-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'request body';
+const body = '{"input":{"question":"எவை மூன்றும் எப்போதும் ஒன்றாகவே இருக்கும்?","lang":"ta","context":"உப்பு, புளி, மிளகாய் மூன்றும் எப்போதும் ஒன்றாகவே இருக்கும். ஒருநாள், “குழம்பிற்கு யார் முக்கியம்? நீயா! நானா!” என்று சண்டை போட்டன. மூன்று பேரும் தனிதனியாகச் சென்று குழம்பில் சேரலாம் என்று முடிவு செய்தன. முதல் நாள், உப்பு மட்டும் குழம்பில் சேர்ந்து கொண்டது. “ஆ! ஒரே உப்பு! வாயில் வைக்க முடியவில்லை!” என்று எல்லோரும் கத்தினார்கள்"}}';
 try {
   const { result, ...httpResponse } = await advancedAPIsController.getQA(body);
   // Get more response info...
@@ -162,8 +162,160 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.html) |
+| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.md) |
+| 429 | Too Many Requests | `ApiError` |
+
+
+# Get Table QA
+
+# TableQA : Defintion and it's usage
+
+Table QA uses TAPAS based model to get answers from table input. The table can be parsed into a JSON object or it can be a link to a CSV file. Currently only Plain CSV file is supported.
+
+This API works only for English language currently
+
+Example for flattend table in JSON Format:<br/>
+{"Cities": ["Paris, France", "London, England", "Lyon, France"], "Inhabitants": ["2.161", "8.982", "0.513"]}
+
+The API can return the original table rows from which the answer was extracted based on the flag 'sendBackRows'
+
+```ts
+async getTableQA(
+  body?: unknown,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ApiTableqaResponse[]>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | `unknown \| undefined` | Body, Optional | Add a JSON Input as per the schema defined below. For URL input, if you are providing Google drive or Google Spreadsheet url ensure that you provide a link which can download the file directly and not the share link.<br><br>Example: For Google Spreadsheet, the url format will be like below:<br>https://docs.google.com/spreadsheets/d/1TtzPAHqpaTB7Ltdq0zwZ8FamF7O9aC4KH4EpmwI/export?format=csv&gid=151344200<br><br>Or for Google Drive, it will be like below:<br>https://drive.google.com/uc?id=idofthefile<br><br>For Flat table input check the example out. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ApiTableqaResponse[]`](/doc/models/api-tableqa-response.md)
+
+## Example Usage
+
+```ts
+const contentType = null;
+const body = '{"input":{"flattable":{"Cities":["Paris, France","London, England","Lyon, France"],"Inhabitants":["2.161","8.982","0.513"]},"sendBackRows":false,"questions":["How many inhabitants in France","How Many inhabitants in England"]}}';
+try {
+  const { result, ...httpResponse } = await advancedAPIsController.getTableQA(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "query": "How many inhabitants in France",
+    "answer": [
+      "SUM > 2.674"
+    ],
+    "rows": [
+      "Paris, France,2.161",
+      "Lyon, France,0.513"
+    ]
+  },
+  {
+    "query": "How Many inhabitants in England",
+    "answer": [
+      "SUM > 8.982"
+    ],
+    "rows": [
+      "London, England,8.982"
+    ]
+  }
+]
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.md) |
+| 429 | Too Many Requests | `ApiError` |
+
+
+# Get Image Caption
+
+# Image Captioning with Visual Attention : Defintion and it's usage
+
+Image Captioning is the process of generating textual description of an image. It uses both Natural Language Processing and Computer Vision to generate the captions.
+
+This API works generates only English Captions
+
+<b>Enterprise Plan Alert:</b> For Enterprise Users GPU powered endpoint can be provisioned. <b> This will reduce the response time of the API by alomst 90%.</b>
+
+```ts
+async getImageCaption(
+  body?: ApiImagecaptionRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ApiImagecaptionResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`ApiImagecaptionRequest \| undefined`](/doc/models/api-imagecaption-request.md) | Body, Optional | Add a JSON Input as per the schema defined below.<br><br>For URL, if you are providing Google drive or Google Spreadsheet url ensure that you provide a link which can download the file directly and not the share link.<br><br>Example: For Google Spreadsheet, the url format will be like below:<br>https://docs.google.com/spreadsheets/d/1TtzPAHqpaTB7Ltdq0zwZ8FamF7OwI/export?format=csv&gid=151344200<br><br>Or for Google Drive, it will be like below:<br>https://drive.google.com/uc?id=idofthefile |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ApiImagecaptionResponse`](/doc/models/api-imagecaption-response.md)
+
+## Example Usage
+
+```ts
+const contentType = null;
+const bodyInput: Input9 = {
+  url: 'https://i.redd.it/v1fvin01ynv51.jpg',
+};
+
+const body: ApiImagecaptionRequest = {
+  input: bodyInput,
+};
+
+try {
+  const { result, ...httpResponse } = await advancedAPIsController.getImageCaption(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "generated_caption": "A view of a beach with a sun shining over it"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
@@ -207,13 +359,13 @@ async getNER(
 
 ## Response Type
 
-[`ApiNerResponse[]`](/doc/models/api-ner-response.html)
+[`ApiNerResponse[]`](/doc/models/api-ner-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'requestbpdy';
+const body = '{"input":{"lang":"ar","text":"إسمي محمد وأسكن في برلين"}}';
 try {
   const { result, ...httpResponse } = await advancedAPIsController.getNER(body);
   // Get more response info...
@@ -249,8 +401,8 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.html) |
+| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
@@ -321,13 +473,13 @@ async getSummary(
 
 ## Response Type
 
-[`ApiSummaryResponse`](/doc/models/api-summary-response.html)
+[`ApiSummaryResponse`](/doc/models/api-summary-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'Liquid error: Object of type 'DotLiquid.Hash' cannot be converted to type 'System.String'.';
+const body = '{"input":{"lang":"en","text":"Videos that say approved vaccines are dangerous and cause autism, cancer or infertility are among those that will be taken down, the company said. The policy includes the termination of accounts of anti-vaccine influencers. Tech giants have been criticised for not doing more to counter false health information on their sites. In July, US President Joe Biden said social media platforms were largely responsible for people\'s scepticism in getting vaccinated by spreading misinformation, and appealed for them to address the issue. YouTube, which is owned by Google, said 130,000 videos were removed from its platform since last year, when it implemented a ban on content spreading misinformation about Covid vaccines. In a blog post, the company said it had seen false claims about Covid jabs spill over into misinformation about vaccines in general. The new policy covers long-approved vaccines, such as those against measles or hepatitis B. We\'re expanding our medical misinformation policies on YouTube with new guidelines on currently administered vaccines that are approved and confirmed to be safe and effective by local health authorities and the WHO, the post said, referring to the World Health Organization."}}';
 try {
   const { result, ...httpResponse } = await advancedAPIsController.getSummary(body);
   // Get more response info...
@@ -352,8 +504,8 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.html) |
+| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
@@ -440,13 +592,13 @@ async getTranslate(
 
 ## Response Type
 
-[`ApiTranslateResponse`](/doc/models/api-translate-response.html)
+[`ApiTranslateResponse`](/doc/models/api-translate-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'Liquid error: Object of type 'DotLiquid.Hash' cannot be converted to type 'System.String'.';
+const body = '{"input":{"lang":"ta","text":"Today is a good day"}}';
 try {
   const { result, ...httpResponse } = await advancedAPIsController.getTranslate(body);
   // Get more response info...
@@ -471,7 +623,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.html) |
+| 400 | Bad Request | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`M426Error`](/doc/models/m426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 

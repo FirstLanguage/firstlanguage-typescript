@@ -1,7 +1,5 @@
 # Basic AP Is
 
-Basic NLP text processing APIs
-
 ```ts
 const basicAPIsController = new BasicAPIsController(client);
 ```
@@ -12,10 +10,10 @@ const basicAPIsController = new BasicAPIsController(client);
 
 ## Methods
 
-* [Get Stemmer](/doc/controllers/basic-ap-is.html#get-stemmer)
-* [Get Lemma](/doc/controllers/basic-ap-is.html#get-lemma)
-* [Get Morph](/doc/controllers/basic-ap-is.html#get-morph)
-* [Get Postag](/doc/controllers/basic-ap-is.html#get-postag)
+* [Get Stemmer](/doc/controllers/basic-ap-is.md#get-stemmer)
+* [Get Lemma](/doc/controllers/basic-ap-is.md#get-lemma)
+* [Get Morph](/doc/controllers/basic-ap-is.md#get-morph)
+* [Get Postag](/doc/controllers/basic-ap-is.md#get-postag)
 
 
 # Get Stemmer
@@ -73,13 +71,13 @@ async getStemmer(
 
 ## Response Type
 
-[`Responsestem[]`](/doc/models/responsestem.html)
+[`Responsestem[]`](/doc/models/responsestem.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'Liquid error: Object of type 'DotLiquid.Hash' cannot be converted to type 'System.String'.';
+const body = '{"input":{"text":"அவள் வேகமாக ஓடினாள்","lang":"ta"}}';
 try {
   const { result, ...httpResponse } = await basicAPIsController.getStemmer(body);
   // Get more response info...
@@ -115,8 +113,8 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`ApiStemmer426Error`](/doc/models/api-stemmer-426-error.html) |
+| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiStemmer426Error`](/doc/models/api-stemmer-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
@@ -163,13 +161,13 @@ async getLemma(
 
 ## Response Type
 
-[`Responselemma[]`](/doc/models/responselemma.html)
+[`Responselemma[]`](/doc/models/responselemma.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'Liquid error: Object of type 'DotLiquid.Hash' cannot be converted to type 'System.String'.';
+const body = '{"input":{"text":"Smiling makes everyone happy","lang":"en"}}';
 try {
   const { result, ...httpResponse } = await basicAPIsController.getLemma(body);
   // Get more response info...
@@ -209,8 +207,8 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`ApiLemmatize426Error`](/doc/models/api-lemmatize-426-error.html) |
+| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiLemmatize426Error`](/doc/models/api-lemmatize-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
@@ -257,13 +255,13 @@ async getMorph(
 
 ## Response Type
 
-[`Responsemorph`](/doc/models/responsemorph.html)
+[`Responsemorph`](/doc/models/responsemorph.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'Liquid error: Object of type 'DotLiquid.Hash' cannot be converted to type 'System.String'.';
+const body = '{"input":{"text":"Let us begin the API development.","lang":"en"}}';
 try {
   const { result, ...httpResponse } = await basicAPIsController.getMorph(body);
   // Get more response info...
@@ -448,8 +446,8 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`ApiMorph426Error`](/doc/models/api-morph-426-error.html) |
+| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiMorph426Error`](/doc/models/api-morph-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
@@ -489,13 +487,13 @@ async getPostag(
 
 ## Response Type
 
-[`Responsepo[]`](/doc/models/responsepo.html)
+[`Responsepo[]`](/doc/models/responsepo.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body = 'Liquid error: Object of type 'DotLiquid.Hash' cannot be converted to type 'System.String'.';
+const body = '{"input":{"text":"Let us begin the API development.","lang":"en"}}';
 try {
   const { result, ...httpResponse } = await basicAPIsController.getPostag(body);
   // Get more response info...
@@ -547,7 +545,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.html) |
-| 426 | Please use HTTPS protocol | [`ApiPostag426Error`](/doc/models/api-postag-426-error.html) |
+| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiPostag426Error`](/doc/models/api-postag-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
