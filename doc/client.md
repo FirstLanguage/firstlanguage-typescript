@@ -6,7 +6,9 @@ The following parameters are configurable for the API Client:
 | Parameter | Type | Description |
 |  --- | --- | --- |
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `0` |
-| `apikey` | `string` | API Key can be copied from your dashboard |
+| `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
+| `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
+| `apikey` | `string` |  |
 
 The API client can be initialized as follows:
 
@@ -27,4 +29,5 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 |  --- | --- |
 | basicAPIs | Gets BasicAPIsController |
 | advancedAPIs | Gets AdvancedAPIsController |
+| enterpriseOnly | Gets EnterpriseOnlyController |
 

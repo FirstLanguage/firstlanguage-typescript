@@ -1,21 +1,21 @@
 
-# Errors Error
+# Input 9
 
 ## Structure
 
-`ErrorsError`
+`Input9`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Errors1[] \| undefined`](/doc/models/errors-1.md) | Optional | - |
+| `url` | `string` | Required | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "errors": null
+  "url": "url4"
 }
 ```
 

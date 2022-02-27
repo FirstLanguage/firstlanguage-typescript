@@ -1,21 +1,21 @@
 
-# Errors Error
+# Api Question Response
 
 ## Structure
 
-`ErrorsError`
+`ApiQuestionResponse`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Errors1[] \| undefined`](/doc/models/errors-1.md) | Optional | - |
+| `answer` | `string` | Required | Answer to the question. |
 
 ## Example (as JSON)
 
 ```json
 {
-  "errors": null
+  "answer": "answer4"
 }
 ```
 

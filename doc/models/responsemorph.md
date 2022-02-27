@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `orignalString` | [`OrignalString \| undefined`](/doc/models/orignal-string.html) | Optional | - |
+| `orignalString` | [`OrignalString \| undefined`](/doc/models/orignal-string.md) | Optional | - |
 
 ## Example (as JSON)
 
