@@ -192,7 +192,7 @@ export class AdvancedAPIsController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ApiImagecaptionResponse>> {
     const req = this.createRequest('POST', '/api/imagecaption');
-    const mapped = this.tryParseJSONObject(body);
+    const mapped = this.tryParseJSONObject(body)
     req.header('Content-Type', 'application/json');
     req.json(mapped);
     req.throwOn(400, ErrorsError, 'Bad Request');
