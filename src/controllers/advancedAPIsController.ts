@@ -24,12 +24,15 @@ import {
   ApiTableqaResponse,
   apiTableqaResponseSchema,
 } from '../models/apiTableqaResponse';
-
+import {
+  ApiTranslateResponse,
+  apiTranslateResponseSchema,
+} from '../models/apiTranslateResponse';
 import {
   Responseclassify,
   responseclassifySchema,
 } from '../models/responseclassify';
-import { array,unknown } from '../schema';
+import { array } from '../schema';
 import { BaseController } from './baseController';
 
 export class AdvancedAPIsController extends BaseController {
@@ -410,7 +413,7 @@ export class AdvancedAPIsController extends BaseController {
   async getTranslate(
     body: string,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<unknown>> {
+  ): Promise<ApiResponse<ApiTranslateResponse>> {
     const req = this.createRequest('POST', '/api/translate');
     const mapped = this.tryParseJSONObject(body);
     req.header('Content-Type', 'application/json');
@@ -418,6 +421,19 @@ export class AdvancedAPIsController extends BaseController {
     req.throwOn(400, ErrorsError, 'Bad Request');
     req.throwOn(426, M426Error, 'Please use HTTPS protocol');
     req.throwOn(429, ApiError, 'Too Many Requests');
-    return req.callAsJson(unknown(), requestOptions);
+    return req.callAsJson(apiTranslateResponseSchema, requestOptions);
+  }
+  async getTranslatedFile(
+    body: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<NodeJS.ReadableStream | Blob>> {
+    const req = this.createRequest('POST', '/api/translate');
+    const mapped = this.tryParseJSONObject(body);
+    req.header('Content-Type', 'application/json');
+    req.json(mapped);
+    req.throwOn(400, ErrorsError, 'Bad Request');
+    req.throwOn(426, M426Error, 'Please use HTTPS protocol');
+    req.throwOn(429, ApiError, 'Too Many Requests');
+    return req.callAsStream(requestOptions);
   }
 }
