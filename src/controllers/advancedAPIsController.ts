@@ -9,10 +9,7 @@ import { ApiResponse, RequestOptions } from '../core';
 import { ApiClassify426Error } from '../errors/apiClassify426Error';
 import { ErrorsError } from '../errors/errorsError';
 import { M426Error } from '../errors/m426Error';
-import {
-  ApiImagecaptionRequest,
-  apiImagecaptionRequestSchema,
-} from '../models/apiImagecaptionRequest';
+
 import {
   ApiImagecaptionResponse,
   apiImagecaptionResponseSchema,
