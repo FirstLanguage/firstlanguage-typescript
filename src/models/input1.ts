@@ -6,13 +6,17 @@
 
 import { object, Schema, string } from '../schema';
 
-/** Text for processing will be read from the given URL. Only HTML pages or text pages will be processed at this time. */
+/** Text for processing will be read from the given URL. */
 export interface Input1 {
   /** URL where the content is hosted. */
   url: string;
   /** Allowed language code. Refer Allowed languages section. */
   lang: string;
-  /** Allowed values or html or text. If html is specified all html tags and special characters will be stripped before processing. */
+  /**
+   * Allowed values are:html,plaintext, pdf, docx
+   * If html is specified all html tags and special characters will be stripped before processing.
+   * For PDF and docx, all text will be read. Scanned documents will not work.
+   */
   contentType: string;
 }
 

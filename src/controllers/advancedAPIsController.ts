@@ -9,7 +9,10 @@ import { ApiResponse, RequestOptions } from '../core';
 import { ApiClassify426Error } from '../errors/apiClassify426Error';
 import { ErrorsError } from '../errors/errorsError';
 import { M426Error } from '../errors/m426Error';
-
+import {
+  ApiImagecaptionRequest,
+  apiImagecaptionRequestSchema,
+} from '../models/apiImagecaptionRequest';
 import {
   ApiImagecaptionResponse,
   apiImagecaptionResponseSchema,
@@ -56,7 +59,6 @@ export class AdvancedAPIsController extends BaseController {
 
 
   /**
-   * # Text Classification  : Defintion and it's usage
    * A text classifier identifies the categories of the text given as input. Classifying the texts is one
    * of the powerful preprocessing technique in topic identification and sentiment classification
    * (product reviews, movie reviews etc)and indexing the texts while building a search system.
@@ -81,7 +83,12 @@ export class AdvancedAPIsController extends BaseController {
    * | Urdu       | ur       |
    * | Vietnamese | vi       |
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile
    * @return Response from the API call
    */
   async getClassification(
@@ -99,7 +106,6 @@ export class AdvancedAPIsController extends BaseController {
   }
 
   /**
-   * # QA : Defintion and it's usage
    * A Question Answering System retrieves the answer relevant to the question given by the user. A
    * question answering system can be used for building a text based chatbots, search engines etc. Our
    * question answering system  is mutilingual and supports 100 + languages. Please use ISO 639-2 2 digit
@@ -109,7 +115,12 @@ export class AdvancedAPIsController extends BaseController {
    * For ISO code reference, please check the link https://www.loc.gov/standards/iso639-2/php/code_list.
    * php
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile
    * @return Response from the API call
    */
   async getQA(
@@ -143,11 +154,11 @@ export class AdvancedAPIsController extends BaseController {
    *
    * @param body         Add a JSON Input as per the schema defined below. For URL input, if you are
    *                                providing Google drive or Google Spreadsheet url ensure that you provide a link
-   *                                which can download the file directly and not the share link.  Example: For Google
-   *                                Spreadsheet, the url format will be like below: https://docs.google.
+   *                                which can download the file directly and not the share link.  Example for Google
+   *                                Spreadsheet link:  https://docs.google.
    *                                com/spreadsheets/d/1TtzPAHqpaTB7Ltdq0zwZ8FamF7O9aC4KH4EpmwI/export?
-   *                                format=csv&gid=151344200  Or for Google Drive, it will be like below: https://drive.
-   *                                google.com/uc?id=idofthefile  For Flat table input check the example out.
+   *                                format=csv&gid=151344200  Example for Google Drive link:  https://drive.google.
+   *                                com/uc?id=idofthefile  For Flat table input check the example.
    * @return Response from the API call
    */
   async getTableQA(
@@ -179,12 +190,8 @@ export class AdvancedAPIsController extends BaseController {
    * @param body         Add a JSON Input as per the schema defined below.   For URL,
    *                                                      if you are providing Google drive or Google Spreadsheet url
    *                                                      ensure that you provide a link which can download the file
-   *                                                      directly and not the share link.  Example: For Google
-   *                                                      Spreadsheet, the url format will be like below: https://docs.
-   *                                                      google.
-   *                                                      com/spreadsheets/d/1TtzPAHqpaTB7Ltdq0zwZ8FamF7OwI/export?
-   *                                                      format=csv&gid=151344200  Or for Google Drive, it will be
-   *                                                      like below: https://drive.google.com/uc?id=idofthefile
+   *                                                      directly and not the share link.  Example for Google Drive:
+   *                                                      https://drive.google.com/uc?id=idofthefile
    * @return Response from the API call
    */
   async getImageCaption(
@@ -202,7 +209,6 @@ export class AdvancedAPIsController extends BaseController {
   }
 
   /**
-   * # Named Entity Recognition : Defintion and it's usage
    * Named Entity Recognitiion  (NER) is extracting the specific Nouns such as, Person Names, Location
    * names, Organization Names, Currency , Dates. It is a classification task. NER can be used as a sub-
    * task in applications such as Search Systems, Chatbots, Question Answering systems, Text
@@ -230,7 +236,12 @@ export class AdvancedAPIsController extends BaseController {
    *
    *
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile
    * @return Response from the API call
    */
   async getNER(
@@ -247,7 +258,6 @@ export class AdvancedAPIsController extends BaseController {
   }
 
   /**
-   * # Summarization : Defintion and it's usage
    * Summarization generates a crisp content of the large input text which is highly coherent.
    *
    *
@@ -299,7 +309,12 @@ export class AdvancedAPIsController extends BaseController {
    *
    *
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile
    * @return Response from the API call
    */
   async getSummary(
@@ -317,7 +332,6 @@ export class AdvancedAPIsController extends BaseController {
   }
 
   /**
-   * # Translation : Defintion and it's usage
    * Machine Translation is translating the text automatically from  one language to another langauge.
    *
    * # Languages covered:
@@ -384,7 +398,19 @@ export class AdvancedAPIsController extends BaseController {
    *
    *
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile  **preserveFormat Flag:**  When true:  This applies only for PDF and
+   *                                DOCX content types. The API will try to maintain the source file formatting. DOCX
+   *                                files will mostly work without any issues. But for PDF files, the API will try to
+   *                                maintain the format but it is not guaranteed. Scanned documents will also not work.
+   *                                For PDF files, if the target language font is not renderred properly, please report
+   *                                the issue at info@firstlanguage.in  When false:  If the flag is false, then the API
+   *                                will simply read all text in the PDF and docx files and translate and send the
+   *                                response back as plaintext.
    * @return Response from the API call
    */
   async getTranslate(

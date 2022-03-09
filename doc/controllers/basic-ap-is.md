@@ -10,15 +10,13 @@ const basicAPIsController = new BasicAPIsController(client);
 
 ## Methods
 
-* [Get Stemmer](/doc/controllers/basic-ap-is.md#get-stemmer)
-* [Get Lemma](/doc/controllers/basic-ap-is.md#get-lemma)
-* [Get Morph](/doc/controllers/basic-ap-is.md#get-morph)
-* [Get Postag](/doc/controllers/basic-ap-is.md#get-postag)
+* [Get Stemmer](../../doc/controllers/basic-ap-is.md#get-stemmer)
+* [Get Lemma](../../doc/controllers/basic-ap-is.md#get-lemma)
+* [Get Morph](../../doc/controllers/basic-ap-is.md#get-morph)
+* [Get Postag](../../doc/controllers/basic-ap-is.md#get-postag)
 
 
 # Get Stemmer
-
-# Stemmer : Defintion and it's usage
 
 A word takes different inflectional forms. For instance, the word, "Compute" can take the forms, "computing", "computation",  and "computerize". The NLP applications such as Search Engines and Information Extraction would want to store the base or stem of the word, i.e "Compute" instead of accomodating all its inflected forms. This will yield in dimensionality reduction and incerases the efficiency of the system. The stemmer cuts the prefix and suffix of a word.
 
@@ -66,12 +64,12 @@ async getStemmer(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | `unknown` | Body, Required | Add a JSON Input as per the schema defined below |
+| `body` | `unknown` | Body, Required | Add a JSON Input as per the schema defined below<br><br>**Size limit:**<br><br>1MB for both text and URL input<br><br>**URL Input:**<br><br>For URL, we now accept 4 contentTypes.<br><br>* html<br>* plaintext<br>* pdf<br>* docx<br><br>If you are providing Google drive or Google Spreadsheet url, ensure that you provide a link which can download the file directly and not the share link.<br><br>Example for Google Drive link:<br><br>https://drive.google.com/uc?id=idofthefile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`Responsestem[]`](/doc/models/responsestem.md)
+[`Responsestem[]`](../../doc/models/responsestem.md)
 
 ## Example Usage
 
@@ -113,14 +111,12 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
-| 426 | Please use HTTPS protocol | [`ApiStemmer426Error`](/doc/models/api-stemmer-426-error.md) |
+| 400 | Error output | [`ErrorsError`](../../doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiStemmer426Error`](../../doc/models/api-stemmer-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
 # Get Lemma
-
-# Lemmatizer : Defintion and it's usage
 
 Lemmatizer is similar to stemmer that gives the stemmed version of a word but lemmatizer differs from the stemmer in giving a meaningful stem or the lemma. For instance, for the word, "smiling", the stemmer would give, "smil", stemming the suffix, "ing" but the lemmatizer would give the meaningful stem, "smile". lemmatizers can be used in applications such as,  Machine Translation, Search Engines, Text Summarization etc.
 
@@ -156,12 +152,12 @@ async getLemma(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | `unknown` | Body, Required | Add a JSON Input as per the schema defined below |
+| `body` | `unknown` | Body, Required | Add a JSON Input as per the schema defined below<br><br>**Size limit:**<br><br>1MB for both text and URL input<br><br>**URL Input:**<br><br>For URL, we now accept 4 contentTypes.<br><br>* html<br>* plaintext<br>* pdf<br>* docx<br><br>If you are providing Google drive or Google Spreadsheet url, ensure that you provide a link which can download the file directly and not the share link.<br><br>Example for Google Drive link:<br><br>https://drive.google.com/uc?id=idofthefile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`Responselemma[]`](/doc/models/responselemma.md)
+[`Responselemma[]`](../../doc/models/responselemma.md)
 
 ## Example Usage
 
@@ -207,14 +203,12 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
-| 426 | Please use HTTPS protocol | [`ApiLemmatize426Error`](/doc/models/api-lemmatize-426-error.md) |
+| 400 | Error output | [`ErrorsError`](../../doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiLemmatize426Error`](../../doc/models/api-lemmatize-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
 # Get Morph
-
-# Morphological Analyzer : Defintion and it's usage
 
 Morphological Analyzer analyzes how a word is formed. It breaks a word into smaller units called, "morphemes" and gives a clue on the pattern of words of a particular langauge.  It can be used for building applications such as,  Machine Translation, Text Summarization, Search systems etc.
 
@@ -250,12 +244,12 @@ async getMorph(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | `unknown` | Body, Required | Add a JSON Input as per the schema defined below |
+| `body` | `unknown` | Body, Required | Add a JSON Input as per the schema defined below<br><br>**Size limit:**<br><br>1MB for both text and URL input<br><br>**URL Input:**<br><br>For URL, we now accept 4 contentTypes.<br><br>* html<br>* plaintext<br>* pdf<br>* docx<br><br>If you are providing Google drive or Google Spreadsheet url, ensure that you provide a link which can download the file directly and not the share link.<br><br>Example for Google Drive link:<br><br>https://drive.google.com/uc?id=idofthefile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`Responsemorph`](/doc/models/responsemorph.md)
+[`Responsemorph`](../../doc/models/responsemorph.md)
 
 ## Example Usage
 
@@ -446,14 +440,12 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
-| 426 | Please use HTTPS protocol | [`ApiMorph426Error`](/doc/models/api-morph-426-error.md) |
+| 400 | Error output | [`ErrorsError`](../../doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiMorph426Error`](../../doc/models/api-morph-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 
 
 # Get Postag
-
-# Parts of Speech Tagger : Defintion and it's usage
 
 Parts of Speech Tagger, which is shortly known as POS Tagger is a software that automatically finds the word classes, when a text input is given. The text input can be a word, a sentence or a set of sentences. The word classes are the grammatical categories such as, Noun, Verb, Adverb etc. The category assigned to each word is called as a tag. A set of tags, each indicating a grammatical category is called, "tagsets". POS tagging is a mandatory pre-processing for most of the Natural Language Processing Applications such as, Information Extraction, Information Retreival systems and Summary generation systems. A POS Tagger is a language-dependent software as the grammar rules will differ for every language. For instance, a word ending with "ing" might indicate a "Verb" in English but this will not be applicable for other languages.
 
@@ -482,12 +474,12 @@ async getPostag(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | `unknown` | Body, Required | Add a JSON Input as per the schema defined below |
+| `body` | `unknown` | Body, Required | Add a JSON Input as per the schema defined below<br><br>**Size limit:**<br><br>1MB for both text and URL input<br><br>**URL Input:**<br><br>For URL, we now accept 4 contentTypes.<br><br>* html<br>* plaintext<br>* pdf<br>* docx<br><br>If you are providing Google drive or Google Spreadsheet url, ensure that you provide a link which can download the file directly and not the share link.<br><br>Example for Google Drive link:<br><br>https://drive.google.com/uc?id=idofthefile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`Responsepo[]`](/doc/models/responsepo.md)
+[`Responsepo[]`](../../doc/models/responsepo.md)
 
 ## Example Usage
 
@@ -545,7 +537,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Error output | [`ErrorsError`](/doc/models/errors-error.md) |
-| 426 | Please use HTTPS protocol | [`ApiPostag426Error`](/doc/models/api-postag-426-error.md) |
+| 400 | Error output | [`ErrorsError`](../../doc/models/errors-error.md) |
+| 426 | Please use HTTPS protocol | [`ApiPostag426Error`](../../doc/models/api-postag-426-error.md) |
 | 429 | Too Many Requests | `ApiError` |
 

@@ -39,7 +39,6 @@ export class BasicAPIsController extends BaseController {
 
 
   /**
-   * # Stemmer : Defintion and it's usage
    * A word takes different inflectional forms. For instance, the word, "Compute" can take the forms,
    * "computing", "computation",  and "computerize". The NLP applications such as Search Engines and
    * Information Extraction would want to store the base or stem of the word, i.e "Compute" instead of
@@ -79,7 +78,12 @@ export class BasicAPIsController extends BaseController {
    * |  Turkish     |  tr        |
    *
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile
    * @return Response from the API call
    */
   async getStemmer(
@@ -97,8 +101,6 @@ export class BasicAPIsController extends BaseController {
   }
 
   /**
-   * # Lemmatizer : Defintion and it's usage
-   *
    * Lemmatizer is similar to stemmer that gives the stemmed version of a word but lemmatizer differs
    * from the stemmer in giving a meaningful stem or the lemma. For instance, for the word, "smiling",
    * the stemmer would give, "smil", stemming the suffix, "ing" but the lemmatizer would give the
@@ -129,7 +131,12 @@ export class BasicAPIsController extends BaseController {
    *
    *
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile
    * @return Response from the API call
    */
   async getLemma(
@@ -147,7 +154,6 @@ export class BasicAPIsController extends BaseController {
   }
 
   /**
-   * # Morphological Analyzer : Defintion and it's usage
    * Morphological Analyzer analyzes how a word is formed. It breaks a word into smaller units called,
    * "morphemes" and gives a clue on the pattern of words of a particular langauge.  It can be used for
    * building applications such as,  Machine Translation, Text Summarization, Search systems etc.
@@ -174,7 +180,12 @@ export class BasicAPIsController extends BaseController {
    * | Spanish            | es       |
    *
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile
    * @return Response from the API call
    */
   async getMorph(
@@ -192,11 +203,10 @@ export class BasicAPIsController extends BaseController {
   }
 
   /**
-   * # Parts of Speech Tagger : Defintion and it's usage
-   * Parts of Speech Tagger, which is shortly known as POS Tagger is a software that automatically
-   * finds the word classes, when a text input is given. The text input can be a word, a sentence or a
-   * set of sentences. The word classes are the grammatical categories such as, Noun, Verb, Adverb etc.
-   * The category assigned to each word is called as a tag. A set of tags, each indicating a grammatical
+   * Parts of Speech Tagger, which is shortly known as POS Tagger is a software that automatically finds
+   * the word classes, when a text input is given. The text input can be a word, a sentence or a set of
+   * sentences. The word classes are the grammatical categories such as, Noun, Verb, Adverb etc. The
+   * category assigned to each word is called as a tag. A set of tags, each indicating a grammatical
    * category is called, "tagsets". POS tagging is a mandatory pre-processing for most of the Natural
    * Language Processing Applications such as, Information Extraction, Information Retreival systems and
    * Summary generation systems. A POS Tagger is a language-dependent software as the grammar rules will
@@ -221,7 +231,12 @@ export class BasicAPIsController extends BaseController {
    *
    *
    *
-   * @param body         Add a JSON Input as per the schema defined below
+   * @param body         Add a JSON Input as per the schema defined below  **Size limit:**   1MB for both
+   *                                text and URL input  **URL Input:**  For URL, we now accept 4 contentTypes. * html *
+   *                                plaintext * pdf * docx  If you are providing Google drive or Google Spreadsheet url,
+   *                                ensure that you provide a link which can download the file directly and not the
+   *                                share link.  Example for Google Drive link:   https://drive.google.com/uc?
+   *                                id=idofthefile
    * @return Response from the API call
    */
   async getPostag(

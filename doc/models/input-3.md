@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `url` | `string` | Required | URL where the content is hosted. |
 | `lang` | `string` | Required | Allowed language code. Refer Allowed languages section. |
-| `contentType` | `string` | Required | Allowed values or html or text. If html is specified all html tags and special characters will be stripped before processing. |
+| `contentType` | `string` | Required | Allowed values are:html,plaintext, pdf, docx<br>If html is specified all html tags and special characters will be stripped before processing.<br>For PDF and docx, all text will be read. Scanned documents will not work. |
 | `labels` | `unknown[]` | Required | Labels to classify |
 
 ## Example (as JSON)

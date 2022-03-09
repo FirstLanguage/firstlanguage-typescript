@@ -8,7 +8,7 @@ import { lazy, object, Schema } from '../schema';
 import { Input1, input1Schema } from './input1';
 
 export interface URLInput {
-  /** Text for processing will be read from the given URL. Only HTML pages or text pages will be processed at this time. */
+  /** Text for processing will be read from the given URL. */
   input: Input1;
 }
 

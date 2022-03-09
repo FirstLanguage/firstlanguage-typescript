@@ -21,7 +21,6 @@ import { BaseController } from './baseController';
 
 export class EnterpriseOnlyController extends BaseController {
   /**
-   * # QA : Defintion and it's usage
    * A Question Answering System retrieves the answer relevant to the question given by the user. A
    * question answering system can be used for building a text based chatbots, search engines etc. Our
    * question answering system  is mutilingual and supports 100 + languages. Please use ISO 639-2 2 digit
@@ -30,6 +29,9 @@ export class EnterpriseOnlyController extends BaseController {
    *
    * For ISO code reference, please check the link https://www.loc.gov/standards/iso639-2/php/code_list.
    * php
+   *
+   * For enterprise, the context for the questions will be stored in memory. The context can be read from
+   * wide range of file and any number of files.
    *
    * @param body         Add a JSON Input as per the schema defined below
    * @return Response from the API call
