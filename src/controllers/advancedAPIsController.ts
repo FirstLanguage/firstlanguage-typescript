@@ -32,7 +32,7 @@ import {
   Responseclassify,
   responseclassifySchema,
 } from '../models/responseclassify';
-import { array, optional, unknown } from '../schema';
+import { array } from '../schema';
 import { BaseController } from './baseController';
 
 export class AdvancedAPIsController extends BaseController {
