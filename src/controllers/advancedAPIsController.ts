@@ -24,10 +24,7 @@ import {
   ApiTableqaResponse,
   apiTableqaResponseSchema,
 } from '../models/apiTableqaResponse';
-import {
-  ApiTranslateResponse,
-  apiTranslateResponseSchema,
-} from '../models/apiTranslateResponse';
+
 import {
   Responseclassify,
   responseclassifySchema,
