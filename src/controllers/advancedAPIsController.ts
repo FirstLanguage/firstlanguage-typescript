@@ -32,7 +32,7 @@ import {
   Responseclassify,
   responseclassifySchema,
 } from '../models/responseclassify';
-import { array } from '../schema';
+import { array,unknown } from '../schema';
 import { BaseController } from './baseController';
 
 export class AdvancedAPIsController extends BaseController {
@@ -413,7 +413,7 @@ export class AdvancedAPIsController extends BaseController {
   async getTranslate(
     body: string,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ApiTranslateResponse>> {
+  ): Promise<ApiResponse<unknown>> {
     const req = this.createRequest('POST', '/api/translate');
     const mapped = this.tryParseJSONObject(body);
     req.header('Content-Type', 'application/json');
@@ -421,6 +421,6 @@ export class AdvancedAPIsController extends BaseController {
     req.throwOn(400, ErrorsError, 'Bad Request');
     req.throwOn(426, M426Error, 'Please use HTTPS protocol');
     req.throwOn(429, ApiError, 'Too Many Requests');
-    return req.callAsJson(apiTranslateResponseSchema, requestOptions);
+    return req.callAsJson(unknown(), requestOptions);
   }
 }
