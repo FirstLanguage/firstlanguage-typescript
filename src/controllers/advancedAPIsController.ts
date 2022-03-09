@@ -315,13 +315,13 @@ export class AdvancedAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getSummary(
-    body?: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ApiSummaryResponse>> {
     const req = this.createRequest('POST', '/api/summary');
-    const mapped = req.prepareArgs({ body: [body, optional(unknown())] });
+    const mapped = this.tryParseJSONObject(body);
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Bad Request');
     req.throwOn(426, M426Error, 'Please use HTTPS protocol');
     req.throwOn(429, ApiError, 'Too Many Requests');
@@ -411,13 +411,13 @@ export class AdvancedAPIsController extends BaseController {
    * @return Response from the API call
    */
   async getTranslate(
-    body?: unknown,
+    body: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ApiTranslateResponse>> {
     const req = this.createRequest('POST', '/api/translate');
-    const mapped = req.prepareArgs({ body: [body, optional(unknown())] });
+    const mapped = this.tryParseJSONObject(body);
     req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.json(mapped);
     req.throwOn(400, ErrorsError, 'Bad Request');
     req.throwOn(426, M426Error, 'Please use HTTPS protocol');
     req.throwOn(429, ApiError, 'Too Many Requests');
