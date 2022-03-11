@@ -7,11 +7,11 @@
 import { object, optional, Schema, string } from '../schema';
 
 export interface Responselemma {
-  orginalText?: string;
+  originalText?: string;
   lemmatized?: string;
 }
 
 export const responselemmaSchema: Schema<Responselemma> = object({
-  orginalText: ['orginalText', optional(string())],
+  originalText: ['originalText', optional(string())],
   lemmatized: ['lemmatized', optional(string())],
 });

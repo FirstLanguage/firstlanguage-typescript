@@ -7,11 +7,11 @@
 import { object, optional, Schema, string } from '../schema';
 
 export interface Responsepo {
-  orginalText?: string;
+  originalText?: string;
   postag?: string;
 }
 
 export const responsepoSchema: Schema<Responsepo> = object({
-  orginalText: ['orginalText', optional(string())],
+  originalText: ['originalText', optional(string())],
   postag: ['postag', optional(string())],
 });

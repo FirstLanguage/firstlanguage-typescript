@@ -93,15 +93,15 @@ try {
 ```json
 [
   {
-    "orginalText": "அவள்",
+    "originalText": "அவள்",
     "stem": "அவள்"
   },
   {
-    "orginalText": "வேகமாக",
+    "originalText": "வேகமாக",
     "stem": "வேகம்"
   },
   {
-    "orginalText": "ஓடினாள்",
+    "originalText": "ஓடினாள்",
     "stem": "ஓடி"
   }
 ]
@@ -181,19 +181,19 @@ try {
 ```json
 [
   {
-    "orginalText": "Smiling",
+    "originalText": "Smiling",
     "lemmatized": "smile"
   },
   {
-    "orginalText": "makes",
+    "originalText": "makes",
     "lemmatized": "make"
   },
   {
-    "orginalText": "everyone",
+    "originalText": "everyone",
     "lemmatized": "everyone"
   },
   {
-    "orginalText": "happy",
+    "originalText": "happy",
     "lemmatized": "happy"
   }
 ]
@@ -503,31 +503,31 @@ try {
 ```json
 [
   {
-    "orginalText": "Let",
+    "originalText": "Let",
     "postag": "VERB"
   },
   {
-    "orginalText": "us",
+    "originalText": "us",
     "postag": "PRON"
   },
   {
-    "orginalText": "begin",
+    "originalText": "begin",
     "postag": "VERB"
   },
   {
-    "orginalText": "the",
+    "originalText": "the",
     "postag": "DET"
   },
   {
-    "orginalText": "API",
+    "originalText": "API",
     "postag": "PROPN"
   },
   {
-    "orginalText": "development",
+    "originalText": "development",
     "postag": "NOUN"
   },
   {
-    "orginalText": ".",
+    "originalText": ".",
     "postag": "PUNCT"
   }
 ]

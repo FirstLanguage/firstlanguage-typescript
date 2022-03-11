@@ -7,11 +7,11 @@
 import { object, optional, Schema, string } from '../schema';
 
 export interface Responsestem {
-  orginalText?: string;
+  originalText?: string;
   stem?: string;
 }
 
 export const responsestemSchema: Schema<Responsestem> = object({
-  orginalText: ['orginalText', optional(string())],
+  originalText: ['originalText', optional(string())],
   stem: ['stem', optional(string())],
 });

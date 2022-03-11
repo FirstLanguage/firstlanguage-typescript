@@ -153,10 +153,10 @@ You will get an output like below
 
 ```
 [
-  { orginalText: 'Smiling', postag: 'VERB' },
-  { orginalText: 'makes', postag: 'VERB' },
-  { orginalText: 'everyone', postag: 'PRON' },
-  { orginalText: 'happy', postag: 'ADJ' }
+  { originalText: 'Smiling', postag: 'VERB' },
+  { originalText: 'makes', postag: 'VERB' },
+  { originalText: 'everyone', postag: 'PRON' },
+  { originalText: 'happy', postag: 'ADJ' }
 ]
 ```
 
